@@ -46,7 +46,7 @@
                     tools:text="Tomorrowland" />
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/ivFavorite"
                     android:layout_width="@dimen/spacing_l"
                     android:layout_height="@dimen/spacing_l"
                     app:layout_constraintBottom_toBottomOf="parent"
