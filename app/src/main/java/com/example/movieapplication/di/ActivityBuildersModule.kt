@@ -1,6 +1,8 @@
 package com.example.movieapplication.di
 
 import com.example.movieapplication.MainActivity
+import com.example.movieapplication.di.detail.DetailFragmentBuildersModule
+import com.example.movieapplication.di.detail.DetailModule
 import com.example.movieapplication.di.main.MainFragmentBuildersModule
 import com.example.movieapplication.di.main.MainModule
 import dagger.Module
@@ -12,7 +14,9 @@ abstract class ActivityBuildersModule {
     @ContributesAndroidInjector(
         modules = [
             MainModule::class,
-            MainFragmentBuildersModule::class
+            MainFragmentBuildersModule::class,
+            DetailModule::class,
+            DetailFragmentBuildersModule::class
         ]
     )
     abstract fun contributeMainActivity(): MainActivity
