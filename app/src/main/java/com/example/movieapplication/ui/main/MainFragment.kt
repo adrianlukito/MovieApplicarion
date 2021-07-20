@@ -7,9 +7,17 @@ import com.example.movieapplication.ui.BaseFragment
 
 class MainFragment: BaseFragment<FragmentMainBinding>() {
 
+    private val viewPagerAdapter by lazy {
+        MainPagerAdapter(requireContext(), requireActivity().supportFragmentManager)
+    }
+
     override fun getContentResource(): Int = R.layout.fragment_main
 
     override fun setupViewBinding(view: View) {
         binding = FragmentMainBinding.bind(view)
+        binding?.run {
+            viewPager.adapter = viewPagerAdapter
+            tabLayout.setupWithViewPager(viewPager)
+        }
     }
 }
