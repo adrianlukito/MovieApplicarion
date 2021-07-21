@@ -1,26 +1,36 @@
 package com.example.movieapplication.ui.main.popular
 
-import android.util.Log
-import androidx.lifecycle.LiveDataReactiveStreams
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.example.movieapplication.model.Movies
 import com.example.movieapplication.model.Resource
 import com.example.movieapplication.network.movie.MovieApi
-import io.reactivex.schedulers.Schedulers
+import com.example.movieapplication.utils.Constants
+import com.example.movieapplication.utils.SchedulerTransformer
+import com.example.movieapplication.utils.customSubscribe
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class PopularViewModel @Inject constructor(
     private val movieApi: MovieApi
 ) : ViewModel() {
 
-    fun test() {
-        LiveDataReactiveStreams.fromPublisher(
-            movieApi.getPopularMovies().map {
-                Log.d("lolo", "test: $it")
-                Resource.success(it)
-            }.onErrorReturn {
-                Resource.error("something when wrong", null)
-            }.subscribeOn(Schedulers.io())
-        )
+    private val disposable = CompositeDisposable()
+
+    internal var currentPage = Constants.START_PAGE
+
+    private val _moviesLiveData = MutableLiveData<Resource<Movies>>()
+    val moviesLiveData: LiveData<Resource<Movies>> = _moviesLiveData
+
+    fun getPopularMovies(page: Int = Constants.START_PAGE) {
+        _moviesLiveData.value = Resource.loading(null)
+        disposable.add(movieApi.getPopularMovies(page = page).compose(SchedulerTransformer()).customSubscribe({
+            _moviesLiveData.value = Resource.success(it)
+        }, {
+            _moviesLiveData.value = it.message?.let { it1 -> Resource.error(it1, null) }
+        }))
     }
 
+    override fun onCleared() {
+        disposable.clear()
+    }
 }

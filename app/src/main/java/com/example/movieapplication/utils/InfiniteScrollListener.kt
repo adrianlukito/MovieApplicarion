@@ -1,10 +1,10 @@
 package com.example.movieapplication.utils
 
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class InfiniteScrollListener(
-    private val layoutManager: LinearLayoutManager,
+    private val layoutManager: GridLayoutManager,
     private var startPage: Int = Constants.START_PAGE,
     private var visibleThreshold: Int = 2,
     private val onLoad: (page: Int) -> Unit

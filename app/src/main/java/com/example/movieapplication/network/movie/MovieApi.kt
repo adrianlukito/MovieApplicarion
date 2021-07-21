@@ -16,14 +16,14 @@ interface MovieApi {
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("language") language: String = "en",
         @Query("page") page: Int = Constants.START_PAGE,
-    ): Flowable<Movies>
+    ): Single<Movies>
 
     @GET("3/movie/top_rated")
     fun getTopRatedMovies(
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("language") language: String = "en",
         @Query("page") page: Int = Constants.START_PAGE,
-    ): Flowable<Movies>
+    ): Single<Movies>
 
     @GET("3/account/{accountId}/favorite/movies")
     fun getFavoriteMovies(
@@ -33,7 +33,7 @@ interface MovieApi {
         @Query("language") language: String = "en",
         @Query("sort_by") sortBy: String = "created_at.asc",
         @Query("page") page: Int = Constants.START_PAGE,
-    ): Flowable<Movies>
+    ): Single<Movies>
 
     @POST("3/account/{account_id}/favorite")
     fun markAsFavorite(@Body request: MarkAsFavoriteRequest): Completable
@@ -42,5 +42,5 @@ interface MovieApi {
     fun getDetailMovie(
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("language") language: String = "en",
-    ): Flowable<Movie>
+    ): Single<Movie>
 }

@@ -33,23 +33,28 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/spacing_s">
+                android:paddingHorizontal="@dimen/spacing_s"
+                android:layout_marginTop="@dimen/spacing_s">
 
                 <TextView
                     android:id="@+id/tvTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView"
+                    app:layout_constraintEnd_toStartOf="@+id/ivFavorite"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Tomorrowland" />
+                    android:textColor="@color/black"
+                    android:layout_marginEnd="@dimen/spacing_s"
+                    android:textSize="16sp"
+                    tools:text="Tomorrowland"
+                    android:maxLines="2"
+                    android:ellipsize="end"/>
 
                 <ImageView
                     android:id="@+id/ivFavorite"
                     android:layout_width="@dimen/spacing_l"
                     android:layout_height="@dimen/spacing_l"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_favorite"
