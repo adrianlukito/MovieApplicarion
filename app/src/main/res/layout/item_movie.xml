@@ -9,13 +9,13 @@
         android:id="@+id/cvMovie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/spacing_s"
         app:cardCornerRadius="@dimen/spacing_s"
         app:cardElevation="@dimen/spacing_xs"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="@dimen/spacing_s">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,8 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:contentDescription="@string/movie_thumbnail"
-                app:srcCompat="@mipmap/ic_launcher"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                app:srcCompat="@mipmap/ic_launcher" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -52,7 +52,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_favorite" />
+                    app:srcCompat="@drawable/ic_favorite"
+                    app:tint="@color/teal_200" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

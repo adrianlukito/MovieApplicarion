@@ -8,7 +8,7 @@ import com.example.movieapplication.ui.BaseFragment
 class MainFragment: BaseFragment<FragmentMainBinding>() {
 
     private val viewPagerAdapter by lazy {
-        MainPagerAdapter(requireContext(), requireActivity().supportFragmentManager)
+        MainPagerAdapter(requireContext(), childFragmentManager)
     }
 
     override fun getContentResource(): Int = R.layout.fragment_main

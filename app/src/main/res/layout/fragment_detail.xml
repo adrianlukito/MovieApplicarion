@@ -1,10 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/black"
+        android:indeterminateTintMode="src_atop"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/error_is_occured"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,12 +56,11 @@
             android:layout_width="100dp"
             android:layout_height="150dp"
             android:layout_marginStart="@dimen/spacing_m"
-            android:layout_marginTop="400dp"
             android:contentDescription="@string/movie_thumbnail"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="@+id/ivMovie"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivMovie"
             app:srcCompat="@mipmap/ic_launcher" />
 
 
@@ -41,10 +68,10 @@
             android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_m"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivThumbnail"
-            app:layout_constraintTop_toBottomOf="@+id/ivMovie"
-            android:padding="@dimen/spacing_m">
+            app:layout_constraintTop_toBottomOf="@+id/ivMovie">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
@@ -69,7 +96,8 @@
                         android:id="@+id/tvTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tomorrowland" />
+                        android:text="Tomorrowland"
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/tvRate"
@@ -78,6 +106,7 @@
                         android:drawablePadding="@dimen/spacing_s"
                         android:gravity="center"
                         android:text="6.3 / 10"
+                        android:textColor="@color/black"
                         app:drawableStartCompat="@drawable/ic_star"
                         app:drawableTint="@color/black" />
 
@@ -88,6 +117,7 @@
                         android:drawablePadding="@dimen/spacing_s"
                         android:gravity="center"
                         android:text="100 views"
+                        android:textColor="@color/black"
                         app:drawableStartCompat="@drawable/ic_people"
                         app:drawableTint="@color/black" />
 
@@ -98,6 +128,7 @@
                         android:drawablePadding="@dimen/spacing_s"
                         android:gravity="center"
                         android:text="22 May 2015"
+                        android:textColor="@color/black"
                         app:drawableStartCompat="@drawable/ic_calendar"
                         app:drawableTint="@color/black" />
 
@@ -110,7 +141,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/linearLayout"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_favorite" />
+                    app:srcCompat="@drawable/ic_favorite"
+                    app:tint="@color/teal_200" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -121,25 +153,30 @@
             android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
             android:layout_margin="@dimen/spacing_m"
+            app:cardCornerRadius="@dimen/spacing_xs"
             app:cardElevation="@dimen/spacing_xs"
-            app:cardCornerRadius="@dimen/spacing_xs">
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_m">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Overview" />
+                    android:text="Overview"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lorem ipsum adsadsad asdsadsadasdasdsad adasdas" />
+                    android:layout_marginTop="@dimen/spacing_s"
+                    android:text="Lorem ipsum adsadsad asdsadsadasdasdsad adasdas"
+                    android:textColor="@color/black" />
 
             </LinearLayout>
 
