@@ -6,25 +6,26 @@ import com.example.movieapplication.model.Movies
 import com.example.movieapplication.utils.Constants
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import io.reactivex.Single
 import retrofit2.http.*
 
 interface MovieApi {
 
-    @GET("movie/popular")
+    @GET("3/movie/popular")
     fun getPopularMovies(
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("language") language: String = "en",
         @Query("page") page: Int = Constants.START_PAGE,
     ): Flowable<Movies>
 
-    @GET("movie/top_rated")
+    @GET("3/movie/top_rated")
     fun getTopRatedMovies(
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("language") language: String = "en",
         @Query("page") page: Int = Constants.START_PAGE,
     ): Flowable<Movies>
 
-    @GET("account/{accountId}/favorite/movies")
+    @GET("3/account/{accountId}/favorite/movies")
     fun getFavoriteMovies(
         @Path("accountId") accountId: Int = Constants.ACCOUNT_ID,
         @Query("api_key") apiKey: String = Constants.API_KEY,
@@ -34,10 +35,10 @@ interface MovieApi {
         @Query("page") page: Int = Constants.START_PAGE,
     ): Flowable<Movies>
 
-    @POST("account/{account_id}/favorite")
+    @POST("3/account/{account_id}/favorite")
     fun markAsFavorite(@Body request: MarkAsFavoriteRequest): Completable
 
-    @GET("movie/{movieId}")
+    @GET("3/movie/{movieId}")
     fun getDetailMovie(
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("language") language: String = "en",

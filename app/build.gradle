@@ -70,6 +70,10 @@ dependencies {
 
     // RxJava
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+
+    def reactivestreams_version = "1.1.1"
+    implementation "android.arch.lifecycle:reactivestreams:$reactivestreams_version"
 
     // Navigation
     implementation "androidx.navigation:navigation-fragment:$navigation_version"

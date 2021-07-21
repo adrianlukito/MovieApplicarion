@@ -1,13 +1,22 @@
 package com.example.movieapplication.ui.main.popular
 
+import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
 import com.example.movieapplication.R
 import com.example.movieapplication.databinding.FragmentPopularBinding
 import com.example.movieapplication.ui.BaseFragment
 import com.example.movieapplication.ui.main.MovieListAdapter
+import com.example.movieapplication.viewmodels.ViewModelProvidersFactory
+import javax.inject.Inject
 
 class PopularFragment: BaseFragment<FragmentPopularBinding>() {
+
+    private lateinit var viewModel: PopularViewModel
+
+    @Inject
+    lateinit var viewModelProvidersFactory: ViewModelProvidersFactory
 
     override fun getContentResource(): Int = R.layout.fragment_popular
 
@@ -26,5 +35,15 @@ class PopularFragment: BaseFragment<FragmentPopularBinding>() {
         binding?.run {
             rvPopularMovies.adapter = adapter
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProviders.of(this, viewModelProvidersFactory).get(PopularViewModel::class.java)
+        subscribeObserver()
+    }
+
+    private fun subscribeObserver() {
+        viewModel.test()
     }
 }
