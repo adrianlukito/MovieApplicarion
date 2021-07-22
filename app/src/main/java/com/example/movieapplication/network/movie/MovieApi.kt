@@ -40,6 +40,7 @@ interface MovieApi {
 
     @GET("3/movie/{movieId}")
     fun getDetailMovie(
+        @Path("movieId") movieId: Int,
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("language") language: String = "en",
     ): Single<Movie>

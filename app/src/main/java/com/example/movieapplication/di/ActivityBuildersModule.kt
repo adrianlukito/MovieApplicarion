@@ -2,10 +2,8 @@ package com.example.movieapplication.di
 
 import com.example.movieapplication.MainActivity
 import com.example.movieapplication.di.detail.DetailFragmentBuildersModule
-import com.example.movieapplication.di.detail.DetailModule
+import com.example.movieapplication.di.detail.DetailViewModelsModule
 import com.example.movieapplication.di.main.MainFragmentBuildersModule
-import com.example.movieapplication.di.main.MainModule
-import com.example.movieapplication.di.main.MainScope
 import com.example.movieapplication.di.main.MainViewModelsModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -19,8 +17,8 @@ abstract class ActivityBuildersModule {
             MainModule::class,
             MainFragmentBuildersModule::class,
             MainViewModelsModule::class,
-            DetailModule::class,
-            DetailFragmentBuildersModule::class
+            DetailFragmentBuildersModule::class,
+            DetailViewModelsModule::class
         ]
     )
     abstract fun contributeMainActivity(): MainActivity

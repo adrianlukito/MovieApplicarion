@@ -42,6 +42,8 @@ class PopularFragment: BaseFragment<FragmentPopularBinding>() {
 
     private fun goToDetail() {
         NavHostFragment.findNavController(this).navigate(R.id.goToDetail)
+//        val directions = PopularFragmentD
+//        NavHostFragment.findNavController(this).navigate()
     }
 
     override fun setupViewBinding(view: View) {
