@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-//    id 'androidx.navigation.safeargs'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -34,6 +34,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 
@@ -79,9 +82,6 @@ dependencies {
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
-//    implementation "androidx.navigation:navigation-runtime:$navigation_version"
-//    implementation "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
-//    implementation "androidx.navigation:navigation-safe-args-gradle-plugin:2.2.0-rc02"
 
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:$recycleview_version"

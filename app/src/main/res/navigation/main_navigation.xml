@@ -29,8 +29,8 @@
 
         <argument
             android:name="movieId"
-            app:argType="string"/>
-
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 
 </navigation>

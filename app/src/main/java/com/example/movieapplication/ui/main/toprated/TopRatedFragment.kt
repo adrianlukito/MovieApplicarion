@@ -13,6 +13,7 @@ import com.example.movieapplication.databinding.FragmentTopRatedBinding
 import com.example.movieapplication.model.Movie
 import com.example.movieapplication.model.Resource
 import com.example.movieapplication.ui.BaseFragment
+import com.example.movieapplication.ui.main.MainFragmentDirections
 import com.example.movieapplication.ui.main.MovieListAdapter
 import com.example.movieapplication.ui.main.favorite.FavoriteViewModel
 import com.example.movieapplication.ui.main.popular.PopularViewModel
@@ -33,7 +34,7 @@ class TopRatedFragment: BaseFragment<FragmentTopRatedBinding>() {
     private val adapter by lazy {
         MovieListAdapter(
             requireContext(),
-            onItemClicked = { goToDetail() },
+            onItemClicked = { goToDetail(it) },
             onFavoriteClicked = { movieId: Int, isFavorite: Boolean ->
                 markAsFavorite(movieId, isFavorite)
             }
@@ -47,8 +48,9 @@ class TopRatedFragment: BaseFragment<FragmentTopRatedBinding>() {
         }
     }
 
-    private fun goToDetail() {
-        NavHostFragment.findNavController(this).navigate(R.id.goToDetail)
+    private fun goToDetail(movieId: Int) {
+        val directions = MainFragmentDirections.goToDetail().setMovieId(movieId)
+        NavHostFragment.findNavController(this).navigate(directions)
     }
 
     override fun setupViewBinding(view: View) {

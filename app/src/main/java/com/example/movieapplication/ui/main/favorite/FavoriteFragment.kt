@@ -1,6 +1,7 @@
 package com.example.movieapplication.ui.main.favorite
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
@@ -13,6 +14,7 @@ import com.example.movieapplication.databinding.FragmentFavoriteBinding
 import com.example.movieapplication.model.Movie
 import com.example.movieapplication.model.Resource
 import com.example.movieapplication.ui.BaseFragment
+import com.example.movieapplication.ui.main.MainFragmentDirections
 import com.example.movieapplication.ui.main.MovieListAdapter
 import com.example.movieapplication.utils.Constants
 import com.example.movieapplication.utils.InfiniteScrollListener
@@ -32,7 +34,7 @@ class FavoriteFragment: BaseFragment<FragmentFavoriteBinding>() {
     private val adapter by lazy {
         MovieListAdapter(
             requireContext(),
-            onItemClicked = { goToDetail() },
+            onItemClicked = { goToDetail(it) },
             onFavoriteClicked = { movieId: Int, isFavorite: Boolean ->
                 markAsFavorite(movieId, isFavorite)
             }
@@ -46,8 +48,9 @@ class FavoriteFragment: BaseFragment<FragmentFavoriteBinding>() {
         }
     }
 
-    private fun goToDetail() {
-        NavHostFragment.findNavController(this).navigate(R.id.goToDetail)
+    private fun goToDetail(movieId: Int) {
+        val directions = MainFragmentDirections.goToDetail().setMovieId(movieId)
+        NavHostFragment.findNavController(this).navigate(directions)
     }
 
     override fun setupViewBinding(view: View) {
@@ -77,6 +80,9 @@ class FavoriteFragment: BaseFragment<FragmentFavoriteBinding>() {
                 Resource.Status.SUCCESS -> it.data?.let { handleSuccess(it.results) }
                 Resource.Status.ERROR -> handleError()
             }
+        })
+        viewModel.markAsFavorite.observe(viewLifecycleOwner, Observer {
+            viewModel.getFavoriteMovies()
         })
     }
 

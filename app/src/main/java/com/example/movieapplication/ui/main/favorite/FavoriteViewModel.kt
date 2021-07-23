@@ -25,6 +25,9 @@ class FavoriteViewModel @Inject constructor(
     private val _moviesLiveData = MutableLiveData<Resource<Movies>>()
     val moviesLiveData: LiveData<Resource<Movies>> = _moviesLiveData
 
+    private val _markAsFavorite = MutableLiveData<Boolean>()
+    val markAsFavorite: LiveData<Boolean> = _markAsFavorite
+
     fun getFavoriteMovies(page: Int = Constants.START_PAGE) {
         _moviesLiveData.value = Resource.loading(null)
         disposable.add(movieApi.getFavoriteMovies(page = page).compose(SchedulerTransformer()).customSubscribe({
@@ -41,8 +44,9 @@ class FavoriteViewModel @Inject constructor(
         )
         disposable.add(movieApi.markAsFavorite(request = request).compose(SchedulerTransformer()).customSubscribe({
             MarkAsFavoriteReceiver.sendBroadcast()
+            _markAsFavorite.value = isFavorite
         }, {
-
+            _markAsFavorite.value = !isFavorite
         }))
     }
 

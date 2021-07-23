@@ -13,12 +13,9 @@ abstract class BaseFragment<T: ViewBinding>: DaggerFragment() {
 
     protected var binding: T? = null
 
-    private lateinit var compositeDisposable: CompositeDisposable
-
     protected abstract fun setupViewBinding(view: View)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        compositeDisposable = CompositeDisposable()
         return inflater.inflate(getContentResource(), container, false)
     }
 

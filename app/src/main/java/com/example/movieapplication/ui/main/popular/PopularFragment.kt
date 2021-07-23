@@ -8,11 +8,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movieapplication.R
-import com.example.movieapplication.broadcastreceiver.RefreshFavoriteHelper
 import com.example.movieapplication.databinding.FragmentPopularBinding
 import com.example.movieapplication.model.Movie
 import com.example.movieapplication.model.Resource
 import com.example.movieapplication.ui.BaseFragment
+import com.example.movieapplication.ui.main.MainFragmentDirections
 import com.example.movieapplication.ui.main.MovieListAdapter
 import com.example.movieapplication.utils.Constants
 import com.example.movieapplication.utils.InfiniteScrollListener
@@ -31,7 +31,7 @@ class PopularFragment: BaseFragment<FragmentPopularBinding>() {
     private val adapter by lazy {
         MovieListAdapter(
             requireContext(),
-            onItemClicked = { goToDetail() },
+            onItemClicked = { goToDetail(it) },
             onFavoriteClicked = { movieId: Int, isFavorite: Boolean ->
                 markAsFavorite(movieId, isFavorite)
             }
@@ -45,10 +45,9 @@ class PopularFragment: BaseFragment<FragmentPopularBinding>() {
         }
     }
 
-    private fun goToDetail() {
-        NavHostFragment.findNavController(this).navigate(R.id.goToDetail)
-//        val directions = PopularFragmentD
-//        NavHostFragment.findNavController(this).navigate()
+    private fun goToDetail(movieId: Int) {
+        val directions = MainFragmentDirections.goToDetail().setMovieId(movieId)
+        NavHostFragment.findNavController(this).navigate(directions)
     }
 
     override fun setupViewBinding(view: View) {

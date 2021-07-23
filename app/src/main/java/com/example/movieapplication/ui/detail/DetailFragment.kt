@@ -39,7 +39,10 @@ class DetailFragment: BaseFragment<FragmentDetailBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelProvidersFactory).get(DetailViewModel::class.java)
-        viewModel.getPopularMovies(movieId)
+        val movieId = arguments?.let { DetailFragmentArgs.fromBundle(it).movieId }
+        movieId?.let {
+            viewModel.getPopularMovies(it)
+        }
         subscribeObserver()
     }
 
@@ -80,6 +83,7 @@ class DetailFragment: BaseFragment<FragmentDetailBinding>() {
             Glide.with(requireContext()).load("${Constants.IMAGE_URL}${item.posterPath}").into(ivThumbnail)
             tvTitle.text = item.originalTitle
             tvRate.text = "${item.voteAverage} / 10"
+            tvViews.text = "${item.voteCount} voters"
             tvReleaseDate.text = item.releaseDate
             tvOverview.text = item.overview
 
