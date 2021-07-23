@@ -1,7 +1,6 @@
 package com.example.movieapplication.ui.main.toprated
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
@@ -33,7 +32,6 @@ class TopRatedFragment: BaseFragment<FragmentTopRatedBinding>() {
 
     private val adapter by lazy {
         MovieListAdapter(
-            requireContext(),
             onItemClicked = { goToDetail(it) },
             onFavoriteClicked = { movieId: Int, isFavorite: Boolean ->
                 markAsFavorite(movieId, isFavorite)

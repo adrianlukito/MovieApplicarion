@@ -13,6 +13,7 @@ import com.example.movieapplication.model.Movie
 import com.example.movieapplication.model.Resource
 import com.example.movieapplication.ui.BaseFragment
 import com.example.movieapplication.utils.Constants
+import com.example.movieapplication.utils.ImageUtils
 import com.example.movieapplication.viewmodels.ViewModelProvidersFactory
 import javax.inject.Inject
 
@@ -79,8 +80,8 @@ class DetailFragment: BaseFragment<FragmentDetailBinding>() {
             loading.isVisible = false
             tvError.isVisible = false
 
-            Glide.with(requireContext()).load("${Constants.IMAGE_URL}${item.backdropPath}").into(ivMovie)
-            Glide.with(requireContext()).load("${Constants.IMAGE_URL}${item.posterPath}").into(ivThumbnail)
+            Glide.with(requireContext()).load(ImageUtils.getMovieImage(item.backdropPath)).into(ivMovie)
+            Glide.with(requireContext()).load(ImageUtils.getMovieImage(item.posterPath)).into(ivThumbnail)
             tvTitle.text = item.originalTitle
             tvRate.text = "${item.voteAverage} / 10"
             tvViews.text = "${item.voteCount} voters"

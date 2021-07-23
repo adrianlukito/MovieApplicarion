@@ -3,7 +3,6 @@ package com.example.movieapplication.broadcastreceiver
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import com.example.movieapplication.BaseApplication
 import com.example.movieapplication.utils.Constants
 

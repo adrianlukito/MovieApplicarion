@@ -30,7 +30,6 @@ class PopularFragment: BaseFragment<FragmentPopularBinding>() {
 
     private val adapter by lazy {
         MovieListAdapter(
-            requireContext(),
             onItemClicked = { goToDetail(it) },
             onFavoriteClicked = { movieId: Int, isFavorite: Boolean ->
                 markAsFavorite(movieId, isFavorite)
