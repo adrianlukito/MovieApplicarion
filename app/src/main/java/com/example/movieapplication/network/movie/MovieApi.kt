@@ -1,5 +1,6 @@
 package com.example.movieapplication.network.movie
 
+import com.example.movieapplication.model.GeneralResponse
 import com.example.movieapplication.model.MarkAsFavoriteRequest
 import com.example.movieapplication.model.Movie
 import com.example.movieapplication.model.Movies
@@ -25,9 +26,9 @@ interface MovieApi {
         @Query("page") page: Int = Constants.START_PAGE,
     ): Single<Movies>
 
-    @GET("3/account/{accountId}/favorite/movies")
+    @GET("3/account/{account_id}/favorite/movies")
     fun getFavoriteMovies(
-        @Path("accountId") accountId: Int = Constants.ACCOUNT_ID,
+        @Path("account_id") accountId: Int = Constants.ACCOUNT_ID,
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("session_id") sessionId: String = Constants.SESSION_ID,
         @Query("language") language: String = "en",
@@ -36,11 +37,16 @@ interface MovieApi {
     ): Single<Movies>
 
     @POST("3/account/{account_id}/favorite")
-    fun markAsFavorite(@Body request: MarkAsFavoriteRequest): Completable
+    fun markAsFavorite(
+        @Path("account_id") accountId: Int = Constants.ACCOUNT_ID,
+        @Query("api_key") apiKey: String = Constants.API_KEY,
+        @Query("session_id") sessionId: String = Constants.SESSION_ID,
+        @Body request: MarkAsFavoriteRequest
+    ): Single<GeneralResponse>
 
-    @GET("3/movie/{movieId}")
+    @GET("3/movie/{movie_id}")
     fun getDetailMovie(
-        @Path("movieId") movieId: Int,
+        @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("language") language: String = "en",
     ): Single<Movie>

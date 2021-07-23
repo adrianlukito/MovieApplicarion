@@ -7,4 +7,5 @@
     <string name="detail">Detail</string>
     <string name="movie_thumbnail">Movie Thumbnail</string>
     <string name="error_is_occured">Error is occured</string>
+    <string name="empty_list">Empty List</string>
 </resources>

@@ -1,6 +1,8 @@
 package com.example.movieapplication.ui.main.popular
 
 import androidx.lifecycle.*
+import com.example.movieapplication.broadcastreceiver.MarkAsFavoriteReceiver
+import com.example.movieapplication.model.MarkAsFavoriteRequest
 import com.example.movieapplication.model.Movies
 import com.example.movieapplication.model.Resource
 import com.example.movieapplication.network.movie.MovieApi
@@ -27,6 +29,18 @@ class PopularViewModel @Inject constructor(
             _moviesLiveData.value = Resource.success(it)
         }, {
             _moviesLiveData.value = it.message?.let { it1 -> Resource.error(it1, null) }
+        }))
+    }
+
+    fun markAsFavorite(movieId: Int, isFavorite: Boolean) {
+        val request = MarkAsFavoriteRequest(
+            mediaId = movieId,
+            favorite = isFavorite
+        )
+        disposable.add(movieApi.markAsFavorite(request = request).compose(SchedulerTransformer()).customSubscribe({
+            MarkAsFavoriteReceiver.sendBroadcast()
+        }, {
+
         }))
     }
 

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movieapplication.R
+import com.example.movieapplication.broadcastreceiver.RefreshFavoriteHelper
 import com.example.movieapplication.databinding.FragmentPopularBinding
 import com.example.movieapplication.model.Movie
 import com.example.movieapplication.model.Resource
@@ -28,9 +29,13 @@ class PopularFragment: BaseFragment<FragmentPopularBinding>() {
     override fun getContentResource(): Int = R.layout.fragment_popular
 
     private val adapter by lazy {
-        MovieListAdapter(requireContext()) {
-            goToDetail()
-        }
+        MovieListAdapter(
+            requireContext(),
+            onItemClicked = { goToDetail() },
+            onFavoriteClicked = { movieId: Int, isFavorite: Boolean ->
+                markAsFavorite(movieId, isFavorite)
+            }
+        )
     }
 
     private val scrollListener by lazy {
@@ -59,6 +64,10 @@ class PopularFragment: BaseFragment<FragmentPopularBinding>() {
         viewModel = ViewModelProviders.of(this, viewModelProvidersFactory).get(PopularViewModel::class.java)
         viewModel.getPopularMovies()
         subscribeObserver()
+    }
+
+    private fun markAsFavorite(movieId: Int, isFavorite: Boolean) {
+        viewModel.markAsFavorite(movieId, isFavorite)
     }
 
     private fun subscribeObserver() {

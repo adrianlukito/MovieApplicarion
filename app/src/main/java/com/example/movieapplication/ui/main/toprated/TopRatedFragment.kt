@@ -31,14 +31,17 @@ class TopRatedFragment: BaseFragment<FragmentTopRatedBinding>() {
     override fun getContentResource(): Int = R.layout.fragment_top_rated
 
     private val adapter by lazy {
-        MovieListAdapter(requireContext()) {
-            goToDetail()
-        }
+        MovieListAdapter(
+            requireContext(),
+            onItemClicked = { goToDetail() },
+            onFavoriteClicked = { movieId: Int, isFavorite: Boolean ->
+                markAsFavorite(movieId, isFavorite)
+            }
+        )
     }
 
     private val scrollListener by lazy {
         InfiniteScrollListener(binding?.rvTopRatedMovies?.layoutManager as GridLayoutManager) {
-            Log.d("lolo", ": $it")
             viewModel.currentPage = it
             viewModel.getTopRatedMovies(it)
         }
@@ -61,6 +64,10 @@ class TopRatedFragment: BaseFragment<FragmentTopRatedBinding>() {
         viewModel = ViewModelProviders.of(this, viewModelProvidersFactory).get(TopRatedViewModel::class.java)
         viewModel.getTopRatedMovies()
         subscribeObserver()
+    }
+
+    private fun markAsFavorite(movieId: Int, isFavorite: Boolean) {
+        viewModel.markAsFavorite(movieId, isFavorite)
     }
 
     private fun subscribeObserver() {

@@ -3,15 +3,18 @@ package com.example.movieapplication.ui.main
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.movieapplication.R
 import com.example.movieapplication.databinding.ItemMovieBinding
 import com.example.movieapplication.model.Movie
 import com.example.movieapplication.utils.Constants
 
 class MovieListAdapter(
     val context: Context,
-    private val onItemClicked: (() -> Unit)? = null,
+    private val onItemClicked: ((movieId: Int) -> Unit)? = null,
+    private val onFavoriteClicked: ((movieId: Int, isFavorite: Boolean) -> Unit)? = null
 ): RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
 
     private val _movies = mutableListOf<Movie>()
@@ -42,10 +45,20 @@ class MovieListAdapter(
         fun bindData(item: Movie) {
             binding.run {
                 cvMovie.setOnClickListener {
-                    onItemClicked?.invoke()
+                    onItemClicked?.invoke(item.id)
+                }
+                ivFavorite.setOnClickListener {
+                    item.isFavorite = !item.isFavorite
+                    notifyItemChanged(adapterPosition)
+                    onFavoriteClicked?.invoke(item.id, item.isFavorite)
                 }
                 tvTitle.text = item.originalTitle
                 Glide.with(context).load("${Constants.IMAGE_URL}${item.posterPath}").into(ivMovie)
+                if(item.isFavorite) {
+                    ivFavorite.setColorFilter(ContextCompat.getColor(context, R.color.red))
+                } else {
+                    ivFavorite.setColorFilter(ContextCompat.getColor(context, R.color.teal_200))
+                }
             }
         }
     }

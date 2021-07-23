@@ -2,6 +2,7 @@ package com.example.movieapplication.ui.detail
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -50,6 +51,15 @@ class DetailFragment: BaseFragment<FragmentDetailBinding>() {
                 Resource.Status.ERROR -> handleError()
             }
         })
+        viewModel.markAsFavorite.observe(viewLifecycleOwner, Observer {
+            binding?.run {
+                if(it) {
+                    ivFavorite.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red))
+                } else {
+                    ivFavorite.setColorFilter(ContextCompat.getColor(requireContext(), R.color.teal_200))
+                }
+            }
+        })
     }
 
     private fun handleLoading() {
@@ -72,6 +82,11 @@ class DetailFragment: BaseFragment<FragmentDetailBinding>() {
             tvRate.text = "${item.voteAverage} / 10"
             tvReleaseDate.text = item.releaseDate
             tvOverview.text = item.overview
+
+            ivFavorite.setOnClickListener {
+                item.isFavorite = !item.isFavorite
+                viewModel.markAsFavorite(item.id, item.isFavorite)
+            }
         }
     }
 

@@ -9,4 +9,5 @@ object Constants {
     const val IMAGE_URL = "https://image.tmdb.org/t/p/original"
     const val ACCOUNT_ID = 10774314
     const val SESSION_ID = "66ec9bb0c4190c49c76bfc4f5c5fbe9f751f46cf"
+    const val MARK_FAVORITE_RECEIVED_ACTION = "com.example.movieapplication.RefreshFavorite"
 }
